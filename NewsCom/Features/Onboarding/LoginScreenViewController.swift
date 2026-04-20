@@ -42,7 +42,7 @@ class LoginScreenViewController: UIViewController {
         view.addSubview(goBack)
         
         goHome.snp.makeConstraints { (make) in
-            make.center.equalToSuperview()
+              
             make.top.equalTo(view.safeAreaLayoutGuide).inset(50)
             
             
@@ -57,13 +57,21 @@ class LoginScreenViewController: UIViewController {
     }
     
     private func navigateToHome() {
-        let vc = BaseTabBarController()
         
-        if let window = self.view.window {
-            window.rootViewController = vc
-            UIView.transition(with: window, duration: 0.3, options: .transitionCurlDown, animations: nil, completion: nil)
-
-            }
+        UserDefaults.standard.set(true, forKey: "hasFinishedOnboarding")
+        UserDefaults.standard.set(true, forKey: "isLoggedIn")
+        RootNavigationService.shared.moveFromSplashToRoot()
+//        let vc = BaseTabBarController()
+//        
+//        if let window = self.view.window {
+//            guard let sceneDelegate = UIApplication.shared.delegate as? AppDelegate else {
+//                return
+//            }
+//
+//           // window.rootViewController = vc // not needed
+//          //  UIView.transition(with: sceneDelegate.window ?? , duration: 0.3, options: .transitionCurlDown, animations: nil, completion: nil)
+//
+//            }
             
         }
 
@@ -73,6 +81,7 @@ class LoginScreenViewController: UIViewController {
     }
     
     @objc private func goBackAction() {
+        
         self.dismiss(animated: true)
     }
 }

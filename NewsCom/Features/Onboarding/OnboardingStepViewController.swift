@@ -87,9 +87,13 @@ class OnboardingStepViewController: UIViewController {
     }
     
     
-    @objc func handleSignUp() { onSignUpPressed?() }
+    @objc func handleSignUp() {
+        print("Signup Tapped")
+              onSignUpPressed?() }
     @objc func handleSkip() { onSkipPressed?() }
-    @objc func handleLogin() { onLoginPressed?()}
+    @objc func handleLogin() {
+        print("Login Tapped")
+        onLoginPressed?()}
 }
 
 

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C2398F7D2F960A7D005AB84A /* News1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2398F7C2F960A75005AB84A /* News1ViewController.swift */; };
+		C2398F802F960AAD005AB84A /* News2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2398F7F2F960AA5005AB84A /* News2ViewController.swift */; };
 		C27AC3D32F8E0BC3005BED43 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27AC3D22F8E0BBD005BED43 /* MainTabBarController.swift */; };
 		C27AC3D52F8E0C08005BED43 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27AC3D42F8E0C00005BED43 /* MenuViewController.swift */; };
 		C27AC3DE2F8E0CDE005BED43 /* Quiz.ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27AC3DD2F8E0CD7005BED43 /* Quiz.ViewController.swift */; };
@@ -33,6 +35,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C2398F7C2F960A75005AB84A /* News1ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = News1ViewController.swift; sourceTree = "<group>"; };
+		C2398F7F2F960AA5005AB84A /* News2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = News2ViewController.swift; sourceTree = "<group>"; };
 		C27AC3D22F8E0BBD005BED43 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		C27AC3D42F8E0C00005BED43 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		C27AC3DD2F8E0CD7005BED43 /* Quiz.ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quiz.ViewController.swift; sourceTree = "<group>"; };
@@ -96,6 +100,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C2398F7E2F960A97005AB84A /* MyNews */ = {
+			isa = PBXGroup;
+			children = (
+				C2F62EDC2F8760260095FFA1 /* MyNewsViewController.swift */,
+				C2398F7C2F960A75005AB84A /* News1ViewController.swift */,
+				C2398F7F2F960AA5005AB84A /* News2ViewController.swift */,
+			);
+			path = MyNews;
+			sourceTree = "<group>";
+		};
 		C27AC3D62F8E0C29005BED43 /* Quiz */ = {
 			isa = PBXGroup;
 			children = (
@@ -149,7 +163,7 @@
 			children = (
 				C27AC3D42F8E0C00005BED43 /* MenuViewController.swift */,
 				C2D802212F8F84ED00DB279E /* MyTopics */,
-				C2F62EDC2F8760260095FFA1 /* MyNewsViewController.swift */,
+				C2398F7E2F960A97005AB84A /* MyNews */,
 				C2F62F0A2F8762070095FFA1 /* NotificationsViewController.swift */,
 				C2F62F0C2F87621B0095FFA1 /* TextSizeViewController.swift */,
 				C2F62F0E2F8762330095FFA1 /* SupportViewController.swift */,
@@ -272,6 +286,7 @@
 			files = (
 				C2F62F0B2F8762130095FFA1 /* NotificationsViewController.swift in Sources */,
 				C2F62EDD2F8760260095FFA1 /* MyNewsViewController.swift in Sources */,
+				C2398F7D2F960A7D005AB84A /* News1ViewController.swift in Sources */,
 				C27AC3D32F8E0BC3005BED43 /* MainTabBarController.swift in Sources */,
 				C2F62F1D2F8762FB0095FFA1 /* SignupScreenViewController.swift in Sources */,
 				C2F62F0D2F87622C0095FFA1 /* TextSizeViewController.swift in Sources */,
@@ -291,6 +306,7 @@
 				C27AC3D52F8E0C08005BED43 /* MenuViewController.swift in Sources */,
 				C2D802232F8F850600DB279E /* Topic1ViewController.swift in Sources */,
 				C2F62F1B2F8762E70095FFA1 /* LoginScreenViewController.swift in Sources */,
+				C2398F802F960AAD005AB84A /* News2ViewController.swift in Sources */,
 				C2F62F172F8762A90095FFA1 /* OnboardingPageViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

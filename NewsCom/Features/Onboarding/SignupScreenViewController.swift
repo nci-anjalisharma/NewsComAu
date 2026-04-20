@@ -63,14 +63,18 @@ class SignupScreenViewController: UIViewController {
     
     private func navigateToHome() {
         
-        let tabVC = BaseTabBarController()
+        UserDefaults.standard.set(true, forKey: "hasFinishedOnboarding")
+        UserDefaults.standard.set(true, forKey: "isSignedUp")
+        RootNavigationService.shared.moveFromSplashToRoot()
         
-        if let window = self.view.window {
-            window.rootViewController = tabVC
-            UIView.transition(with: window, duration: 0.4, options: .curveEaseInOut, animations: nil, completion: nil)
-            
-        
-        }
+//        let tabVC = BaseTabBarController()
+//        
+//        if let window = self.view.window {
+//            window.rootViewController = tabVC
+//            UIView.transition(with: window, duration: 0.4, options: .curveEaseInOut, animations: nil, completion: nil)
+//            
+//        
+//        }
     }
     
     

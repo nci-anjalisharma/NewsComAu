@@ -19,13 +19,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
         let window = UIWindow(windowScene: windowScene)
-        
-        let rootViewController = SplashViewController()
-        
-        window.rootViewController = rootViewController
-        
         self.window = window
-        window.makeKeyAndVisible()
+        
+//        UserDefaults.standard.removeObject(forKey: "hasFinishedOnboarding")
+        RootNavigationService.shared.showSplash(in: window)
+        
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

@@ -30,7 +30,7 @@ class SplashViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .white
         
         setUpLayout()
         startSplashAnimation()
@@ -55,25 +55,26 @@ class SplashViewController: UIViewController {
         
         UIView.animate(withDuration: 0.8, delay: 0.2, options: .curveEaseInOut, animations: {
             self.logoImageView.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
-        }) {_ in
+        }) { _ in
+            
             // redirecting to onboardingPage
-            DispatchQueue.main.asyncAfter(deadline: .now() + 5) {[weak self] in
-                self?.navigateToOnboarding()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                RootNavigationService.shared.moveFromSplashToRoot()
             }
         }
     }
     
-    private func navigateToOnboarding(){
-        
-        let onboardingVC = OnboardingPageViewController()
-        onboardingVC.modalPresentationStyle = .fullScreen
-        onboardingVC.modalTransitionStyle = .crossDissolve
-        
-        if let window = self.view.window {
-            window.rootViewController = onboardingVC
-            UIView.transition(with: window, duration: 0.5, options: .transitionCrossDissolve, animations: nil)
-        }
-    }
+//    private func navigateToOnboarding(){
+//        
+//        let onboardingVC = OnboardingPageViewController()
+//        onboardingVC.modalPresentationStyle = .fullScreen
+//        onboardingVC.modalTransitionStyle = .crossDissolve
+//        
+//        if let window = self.view.window {
+//            window.rootViewController = onboardingVC
+//            UIView.transition(with: window, duration: 0.5, options: .transitionCrossDissolve, animations: nil)
+//        }
+//    }
 }
 
 

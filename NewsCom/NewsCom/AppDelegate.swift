@@ -11,10 +11,45 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
-
+    
+    
+    
+   
+    
+    
+    
+    
+//    extension RootViewControllerService {
+//        var shouldDisplayOnboarding: Bool {
+//            !UserDefaults.standard.bool(forKey: OnboardingViewModel.userHasFinishedOnboardingKey)
+//        }
+//        func setupSplashRootViewController(_ window: inout UIWindow?) {
+//        window = UIWindow(frame: UIScreen.main.bounds)
+//        guard let window = window else { fatalError("Could not initialize main window")
+//            
+//            let splashScreenViewController = SplashViewController().build()
+//            let navigationController = UINavigationController(rootViewController: splashScreenViewController)
+//            window.rootViewController = navigationController
+//            window.makeKeyAndVisible()
+//        }
+//    }
+    
+//    
+//        func getAppDelegate() {
+//            guard let appDelegate = UIApplication.shared.delegate as? SceneDelegate else {
+//                return
+//            }
+//            appDelegate.window
+//        }
+    
+    
+        
+        
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        return true
+         return true
+        
+        
     }
 
     // MARK: UISceneSession Lifecycle
@@ -31,6 +66,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
 
+     
 
 }
 

@@ -23,7 +23,13 @@ class OnboardingPageViewController: UIPageViewController, UIPageViewControllerDa
         super.viewDidLoad()
         setupPages()
         self.dataSource = self
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .gray
+        
+        
+        
+        if let firstPage = pagesList.first {
+            setViewControllers([firstPage], direction: .forward, animated: true)
+        }
         
     }
     
@@ -39,6 +45,10 @@ class OnboardingPageViewController: UIPageViewController, UIPageViewControllerDa
             
             stepVC.onSignUpPressed = {
                 
+//                UserDefaults.standard.set(true, forKey: "hasSignedUp")
+//                RootNavigationService.shared.moveFromSplashToRoot()
+                
+                
                 let vc = SignupScreenViewController()
                 vc.modalPresentationStyle = .popover
                 self.present(vc, animated: true)
@@ -49,6 +59,10 @@ class OnboardingPageViewController: UIPageViewController, UIPageViewControllerDa
             }
             
             stepVC.onLoginPressed = {
+                
+//                UserDefaults.standard.set(true, forKey: "hasLoggedIn")
+//                RootNavigationService.shared.moveFromSplashToRoot()
+                
                 let vc = LoginScreenViewController()
                 vc.modalPresentationStyle = .popover
                 self.present(vc, animated: true)
@@ -59,18 +73,17 @@ class OnboardingPageViewController: UIPageViewController, UIPageViewControllerDa
             }
             
             stepVC.onSkipPressed = {
-                let vc = BaseTabBarController()
-                if let window = self.view.window {
-                    window.rootViewController = vc
-                    UIView.transition(with: window, duration: 0.3, options: .transitionCrossDissolve, animations: nil)
-                }
+                 
+                
+                UserDefaults.standard.set(true, forKey: "hasFinishedOnboarding")
+                RootNavigationService.shared.moveFromSplashToRoot()
+//                UIView.transition(with: RootNavigationService.shared.window!, duration: 0.3, options: .transitionCurlUp, animations: nil)
+//                
             }
             pagesList.append(stepVC)
            
         }
-        if let firstPage = pagesList.first {
-            setViewControllers([firstPage], direction: .forward, animated: true)
-        }
+        
         
     }
 }
