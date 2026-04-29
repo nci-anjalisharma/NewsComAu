@@ -36,7 +36,7 @@ class OnboardingPageViewController: UIPageViewController, UIPageViewControllerDa
     private func setupPages() {
         
         let topics: [String] = ["Page 1", "Page 2", "Page 3", "Page 4", "Page 5"]
-        let colors: [UIColor] = [.systemRed, .systemOrange, .systemYellow, .systemGreen, .systemBlue]
+        let colors: [UIColor] = [.systemPink, .systemOrange, .systemYellow, .systemGreen, .systemBlue]
         
         for i in 0..<topics.count {
             let stepVC = OnboardingStepViewController()
@@ -48,10 +48,8 @@ class OnboardingPageViewController: UIPageViewController, UIPageViewControllerDa
 //                UserDefaults.standard.set(true, forKey: "hasSignedUp")
 //                RootNavigationService.shared.moveFromSplashToRoot()
                 
+                RootNavigationService.shared.showSignupPage()
                 
-                let vc = SignupScreenViewController()
-                vc.modalPresentationStyle = .popover
-                self.present(vc, animated: true)
 //                if let window = self.view.window {
 //                    window.rootViewController = vc
 //                    UIView.transition(with: window, duration: 0.3, options: .transitionCurlUp, animations: nil)
@@ -63,9 +61,7 @@ class OnboardingPageViewController: UIPageViewController, UIPageViewControllerDa
 //                UserDefaults.standard.set(true, forKey: "hasLoggedIn")
 //                RootNavigationService.shared.moveFromSplashToRoot()
                 
-                let vc = LoginScreenViewController()
-                vc.modalPresentationStyle = .popover
-                self.present(vc, animated: true)
+                RootNavigationService.shared.showLoginPage()
 //                if let window = self.view.window {
 //                    window.rootViewController = vc
 //                    UIView.transition(with: window, duration: 0.3, options: .transitionCurlUp, animations: nil)
@@ -75,10 +71,10 @@ class OnboardingPageViewController: UIPageViewController, UIPageViewControllerDa
             stepVC.onSkipPressed = {
                  
                 
-                UserDefaults.standard.set(true, forKey: "hasFinishedOnboarding")
-                RootNavigationService.shared.moveFromSplashToRoot()
-//                UIView.transition(with: RootNavigationService.shared.window!, duration: 0.3, options: .transitionCurlUp, animations: nil)
-//                
+                UserDefaults.standard.set(false, forKey: "hasLoggedIn")
+                UserDefaults.standard.set(false, forKey: "hasSignedUp")
+                RootNavigationService.shared.showTabBar()
+                 
             }
             pagesList.append(stepVC)
            

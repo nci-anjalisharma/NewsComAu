@@ -11,9 +11,13 @@ class MenuViewController: UIViewController {
     
     
 
-    private lazy var loginButton: UIButton = {
+    private lazy var loginLogoutButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Login", for: .normal)
+        if RootNavigationService.isUserLoggedIn == true {
+            button.setTitle("Logout", for: .normal)
+        } else {
+            button.setTitle("Login", for: .normal)
+        }
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = .systemBlue
         button.layer.cornerRadius = 8
@@ -45,7 +49,7 @@ class MenuViewController: UIViewController {
         view.addSubview(notifications)
         view.addSubview(textSize)
         view.addSubview(about)
-        view.addSubview(loginButton)
+        view.addSubview(loginLogoutButton)
     }
 
     private func layout() {
@@ -65,7 +69,7 @@ class MenuViewController: UIViewController {
             }
         }
 
-        loginButton.snp.makeConstraints { make in
+        loginLogoutButton.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(16)
             make.height.equalTo(45)
             make.bottom.equalTo(view.safeAreaLayoutGuide).inset(20)
@@ -90,8 +94,13 @@ class MenuViewController: UIViewController {
              
         } else if currentTitle == "About" {
             navigationController?.pushViewController(AboutViewController(), animated: true)
+        } else if currentTitle == "Logout" {
+             
+            RootNavigationService.shared.showOnboardingPage()
+            
         } else if currentTitle == "Login" {
-            navigationController?.pushViewController(LoginScreenViewController(), animated: true)
+            
+            RootNavigationService.shared.showLoginPage()
         }
     }
 }

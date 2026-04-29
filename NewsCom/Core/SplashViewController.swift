@@ -17,8 +17,14 @@ class SplashViewController: UIViewController {
         
         let iv = UIImageView()
         
-        iv.image = UIImage(systemName: "newspaper.circle.fill")
-        iv.contentMode = .scaleAspectFit
+        
+        iv.image = UIImage(named: "ncaNameLogo")
+//        iv.image = UIImage(systemName: "newspaper.circle.fill")
+//        iv.image = UIImage(named: "appleLogo")
+
+//        iv.contentMode = .scaleAspectFit
+        iv.contentMode = .scaleAspectFill
+        
         iv.backgroundColor = .systemBackground
         
         
@@ -53,7 +59,7 @@ class SplashViewController: UIViewController {
     
     private func startSplashAnimation(){
         
-        UIView.animate(withDuration: 0.8, delay: 0.2, options: .curveEaseInOut, animations: {
+        UIView.animate(withDuration: 0.3, delay: 0.2, options: .curveEaseInOut, animations: {
             self.logoImageView.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
         }) { _ in
             
@@ -62,6 +68,7 @@ class SplashViewController: UIViewController {
                 RootNavigationService.shared.moveFromSplashToRoot()
             }
         }
+        UserDefaults.standard.set(true, forKey: "hasFinishedOnboarding")
     }
     
 //    private func navigateToOnboarding(){
