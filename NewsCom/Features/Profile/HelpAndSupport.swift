@@ -7,13 +7,12 @@
 
 import UIKit
 
-class TextSizeViewController: UIViewController {
+class HelpAndSupport: UIViewController {
     override func viewDidLoad() {
     
         super.viewDidLoad()
         
-        self.title = "Text Size"
-        view.backgroundColor = .white
+        navigationItem.title = "Help and Support"
         
     }
    }

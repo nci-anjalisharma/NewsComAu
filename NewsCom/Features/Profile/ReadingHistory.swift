@@ -7,13 +7,13 @@
 
 import UIKit
 
-class NotificationsViewController: UIViewController {
+class ReadingHistory: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = "Notifications"
-        view.backgroundColor = .white
+        navigationItem.title = "Reading History"
+        
         
     }
 }

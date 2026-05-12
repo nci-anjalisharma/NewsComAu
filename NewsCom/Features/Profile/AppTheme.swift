@@ -7,11 +7,12 @@
 
 import UIKit
 
-class Topic2ViewController: UIViewController {
+class AppTheme: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Topic 2"
+        
+        navigationItem.title = "App Theme"
         
     }
    

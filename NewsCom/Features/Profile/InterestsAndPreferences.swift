@@ -7,12 +7,13 @@
 
 import UIKit
 
-class MyTopicsViewController: UIViewController {
+class InterestsAndPreferences: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "My Topics"
-        view.backgroundColor = .white
+        
+        navigationItem.title = "Interests and Preferences"
+        
     }
     
   

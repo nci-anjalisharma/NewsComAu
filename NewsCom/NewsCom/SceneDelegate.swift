@@ -20,7 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let window = UIWindow(windowScene: windowScene)
         self.window = window
-        
+    
 //        UserDefaults.standard.removeObject(forKey: "hasFinishedOnboarding")
         RootNavigationService.shared.showSplash(in: window)
         

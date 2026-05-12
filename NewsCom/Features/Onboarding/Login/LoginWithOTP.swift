@@ -9,7 +9,7 @@ import UIKit
 
 class LoginWithOTP: UIViewController, UITextFieldDelegate {
     
-    private var timer: Timer?
+    //    private var timer: Timer?
     
     
     @IBOutlet weak var otpPlaceholder: UIStackView!
@@ -37,7 +37,7 @@ class LoginWithOTP: UIViewController, UITextFieldDelegate {
     
     
     @IBOutlet weak var resendCodeButton: UIButton!
-     
+    
     
     
     
@@ -51,8 +51,21 @@ class LoginWithOTP: UIViewController, UITextFieldDelegate {
     
     @IBAction func verifyAndContinueTapped(_ sender: Any) {
         
-        UserDefaults.standard.set(true, forKey: "hasLoggedIn")
-        RootNavigationService.shared.showTabBar()
+        //        UserDefaults.standard.set(true, forKey: "hasLoggedIn")
+        //        RootNavigationService.shared.showTabBar()
+        
+        let first = firstTextField.text ?? ""
+        let second = secondTextField.text ?? ""
+        let third = thirdTextField.text ?? ""
+        let fourth = fourthTextField.text ?? ""
+        
+        
+        if first == "1", second == "2", third == "3", fourth == "4" {
+            UserDefaults.standard.set(true, forKey: "hasLoggedIn")
+            RootNavigationService.shared.showTabBar()
+        } else {
+            print("Invalid OTP")
+        }
         
     }
     
@@ -64,12 +77,53 @@ class LoginWithOTP: UIViewController, UITextFieldDelegate {
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
+//                    if !string.isEmpty {
+//                        let textField.text = string
+//        
+//                        if let nextField = textField + 1 {
+//                            nextField.becomeFirstResponder()
+//                        } else {
+//                            nextField.resignFirstResponder()
+//                        }
+//        
+//        
+//                    }
+        //
+        //
+        //
+        //            if string.isEmpty {
+        //                let textField.text = " "
+        //
+        //            if let previousField =  textField + 1 {
+        //                        previousField.becomeFirstResponder()
+        //                    }
+        //                    return false
+        //                }
+        //
+        //                return true
+        //
+        //    }
+        //
+        //    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        //
+        //        if textField == firstTextField {
+        //
+        //            secondTextField.becomeFirstResponder()
+        //        } else if textField == secondTextField {
+        //                 thirdTextField.becomeFirstResponder()
+        //             } else if textField == thirdTextField {
+        //
+        //                 fourthTextField.becomeFirstResponder()
+        //
+        //             }
+        //
+        //
+        //            return true
+        //        }
+        //
+        //    }
         
         
-        
-        
-        return false
+        return true
     }
 }
-
-

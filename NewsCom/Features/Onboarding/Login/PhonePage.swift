@@ -1,14 +1,18 @@
 //
-//  SearchViewController.swift
+//  PhonePage.swift
 //  NewsCom
 //
-//  Created by ANJALI SHARMA R on 15/04/26.
+//  Created by ANJALI SHARMA R on 29/04/26.
 //
 
 import UIKit
 
-
-class SearchViewController: UISearchController {
+class PhonePage: UIViewController {
+    
+    
+    
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()

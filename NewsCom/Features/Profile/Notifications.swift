@@ -7,11 +7,11 @@
 
 import UIKit
 
-class Topic1ViewController: UIViewController {
+class Notifications: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = "Topic 1"
+        navigationItem.title = "Notifications"
     }
 }

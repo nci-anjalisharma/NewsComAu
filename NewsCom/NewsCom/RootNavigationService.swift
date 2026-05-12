@@ -117,7 +117,7 @@ class RootNavigationService {
     
     func showLoginWithOTP(){
         let vc = storyboard(withID: "loginWithOTP")
-        switchVC(vc)
+        switchVC(vc) 
         
     }
     
@@ -135,6 +135,12 @@ class RootNavigationService {
         
         switchVC(vc)
         
+    }
+    
+    func showForgotPassword()  {
+        let vc = storyboard(withID: "forgotPassword")
+        
+        switchVC(vc)
     }
     
     func showTermsAndConditions() -> UIViewController{

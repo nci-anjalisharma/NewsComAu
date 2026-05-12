@@ -12,7 +12,7 @@ class WatchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = "Watch"
+        self.title = "Explore"
     }
    
     }

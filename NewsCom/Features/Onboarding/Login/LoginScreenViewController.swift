@@ -9,9 +9,19 @@
 import UIKit
 import SnapKit
 
-class LoginScreenViewController: UIViewController {
+class LoginScreenViewController: UIViewController, UITextFieldDelegate {
     
-    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        let maxLength = 8
+        
+        if let currentPassword = passwordField.text, currentPassword.count <= maxLength {
+            return true
+        }
+
+        return false
+       
+    }
     
     
     
@@ -24,6 +34,12 @@ class LoginScreenViewController: UIViewController {
     
     
     @IBOutlet weak var emailTextField: UITextField!
+    
+    @IBOutlet weak var passwordField: UITextField!
+    
+    func passwordHide() {
+        passwordField.isSecureTextEntry = true
+    }
     
     @IBOutlet weak var forgotPassword: UIButton!
     
@@ -141,10 +157,11 @@ class LoginScreenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 //        setupUI()
-        self.title = "Enter valid email and password to Login"
-        
+        self.title = "Log in to Continue"
+
         //        setLoginPage()
         view.backgroundColor = .systemBackground
+        passwordHide()
         
     }
     
@@ -232,7 +249,22 @@ class LoginScreenViewController: UIViewController {
     
     @IBAction func loginButtonTapped(_ sender: Any) {
         
-        RootNavigationService.shared.showLoginWithOTP()
+//        RootNavigationService.shared.showLoginWithOTP()
+        
+        
+        let email = emailTextField.text ?? ""
+        let password = passwordField.text ?? ""
+        
+        if email == " " || password == " " {
+            print("Please fill all the fields")
+        } else if email == "test@gmail.com" && password == "1234" {
+            RootNavigationService.shared.showLoginWithOTP()
+            
+        } else {
+             print("Invalid Credentials")
+        }
+        
+        
         
         
     }
@@ -245,7 +277,7 @@ class LoginScreenViewController: UIViewController {
     
     @IBAction func forgotPassword(_ sender: Any) {
         
-        RootNavigationService.shared.showTabBar()
+        RootNavigationService.shared.showForgotPassword()
     }
 }
 

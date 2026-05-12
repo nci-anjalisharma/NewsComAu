@@ -11,7 +11,23 @@
 import UIKit
 import SnapKit
 
-class SignupScreenViewController: UIViewController {
+class SignupScreenViewController: UIViewController , UITextFieldDelegate {
+    
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn: NSRange, replacementString: String) -> Bool {
+        
+//        guard let textField"
+        
+        return true
+    }
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     
@@ -23,12 +39,14 @@ class SignupScreenViewController: UIViewController {
     
     @IBOutlet weak var emailTextField: UITextField!
     
-    func emailFunction() {
-        emailTextField.placeholder = "@gmail.com"
-        emailTextField.leftView = emailLabel
-        emailTextField.leftViewMode = .always
-
-    }
+    
+//
+//    func emailFunction() {
+//        emailTextField.placeholder = " @gmail.com"
+//        emailTextField.leftView = emailLabel
+//        emailTextField.leftViewMode = .always
+//
+//    }
     
     @IBOutlet weak var forgotPasswordButton: UIButton!
     
@@ -36,12 +54,13 @@ class SignupScreenViewController: UIViewController {
     
     @IBOutlet weak var passwordLabel: UILabel!
     
-    func passwordFunction() {
-        passwordField.placeholder = "Password"
-        passwordField.leftView = passwordLabel
-        passwordField.leftViewMode = .always
-    }
-    
+//    func passwordFunction() {
+//        passwordField.placeholder = "Password"
+//        passwordField.leftView = passwordLabel
+//        passwordField.leftViewMode = .always
+//        
+//    }
+//    
     
     @IBOutlet weak var signupButton: UIButton!
     
@@ -74,8 +93,8 @@ class SignupScreenViewController: UIViewController {
         //        setupUI()
         view.backgroundColor = .systemBackground
         self.title = "Sign up to Continue"
-        emailFunction()
-        passwordFunction()
+//        emailFunction()
+//        passwordFunction()
         
     }
     //
@@ -109,6 +128,7 @@ class SignupScreenViewController: UIViewController {
     @IBAction func forgotPasswordButton(_ sender: Any) {
         
 //        RootNavigationService.shared.switchVC(ForgotPassword())
+        RootNavigationService.shared.showForgotPassword()
        
     }
     
