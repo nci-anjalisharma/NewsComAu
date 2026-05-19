@@ -91,14 +91,13 @@ class RelatedStoriesCell: UITableViewCell  {
 
         let layout = UICollectionViewFlowLayout()
 
-        layout.scrollDirection = .horizontal
-        layout.minimumLineSpacing = 5
-        layout.itemSize = CGSize(width: 300, height: 500)
-        layout.estimatedItemSize = .zero
+//        layout.scrollDirection = .horizontal
+//        layout.minimumLineSpacing = 5
+//        layout.itemSize = CGSize(width: 300, height: 500)
+//        layout.estimatedItemSize = .zero
 
         collectionView = UICollectionView(
-            frame: .zero,
-            collectionViewLayout: layout
+            frame: .zero, collectionViewLayout: layout
         )
 
         collectionView.backgroundColor = .red
@@ -131,24 +130,27 @@ extension RelatedStoriesCell: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BreakingNewsCollectionViewCell.identifier, for: indexPath) as! BreakingNewsCollectionViewCell
-            
-        let article = relatedArticles[indexPath.item]
-
-        cell.configure(title: article.author, imageName: article.imageURL, headLine: article.title)
-       print("Row cell")
+        cell.contentView.backgroundColor = .orange
+        
+//
+//        let article = relatedArticles[indexPath.item]
+//
+//        cell.configure(title: article.author, imageName: article.imageURL, headLine: article.title)
+//       print("Row cell")
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return relatedArticles.count
+        return 1
     }
-    
-    func collectionView(_ collectionView: UICollectionView, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        print("size for row called")
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        print("collectionViewLayout size for row called")
         return CGSize(width: 280, height: 300)
     }
+   
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
-    }
+    
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+//        return UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
+//    }
 }
