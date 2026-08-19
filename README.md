@@ -1094,7 +1094,7 @@ Features such as Saved Articles, Reading History, Reading Goals, Read Aloud, Tra
 
 # Credits
 
-Developed by **Anjali Sharma R**.
+Developed by **Anjali Sharma**.
 
 **The Daily News** is an iOS development project focused on building a modern native news application while exploring UIKit, Swift, and Apple's modern frameworks.
 
