@@ -19,8 +19,6 @@ class ThemePaletteCell: UITableViewCell {
     private let subtitleLabel = UILabel()
     private let checkMarkImageView = UIImageView()
         
-    
-    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupUI()
@@ -38,12 +36,13 @@ class ThemePaletteCell: UITableViewCell {
         containerView.layer.cornerRadius = 20
         
         containerView.snp.makeConstraints { make in
-            make.top.bottom.equalToSuperview().inset(6)
+            make.top.bottom.equalToSuperview().inset(2)
             make.leading.trailing.equalToSuperview().inset(20)
         }
         
         colorPreview.layer.cornerRadius = 18
         containerView.addSubview(colorPreview)
+        
         colorPreview.snp.makeConstraints{ make in
             make.leading.equalToSuperview().offset(16)
             make.centerY.equalToSuperview()
@@ -51,6 +50,7 @@ class ThemePaletteCell: UITableViewCell {
         }
         
         containerView.addSubview(secondaryPreview)
+        
         secondaryPreview.layer.cornerRadius = 18
         
         secondaryPreview.snp.makeConstraints { make in
@@ -59,18 +59,13 @@ class ThemePaletteCell: UITableViewCell {
             make.width.height.equalTo(36)
         }
         
-        titleLabel.font = .systemFont(ofSize: 18, weight: .semibold)
-        titleLabel.textColor = .black
-        
         containerView.addSubview(titleLabel)
         
         titleLabel.snp.makeConstraints{ make in
             make.top.equalToSuperview().offset(18)
-            make.leading.equalTo(colorPreview.snp.trailing).offset(16)
+            make.leading.equalTo(secondaryPreview.snp.trailing).offset(10)
         }
-        
-        subtitleLabel.font = .systemFont(ofSize: 14, weight: .regular)
-        subtitleLabel.textColor = .gray
+
         containerView.addSubview(subtitleLabel)
         
         subtitleLabel.snp.makeConstraints { make in
@@ -90,16 +85,25 @@ class ThemePaletteCell: UITableViewCell {
         
     }
     
-    func configure(theme: Theme){
-        
-        titleLabel.text = theme.title
+    func configure(theme: ThemeModel, isSelected: Bool) {
+
+        titleLabel.text = theme.name
         subtitleLabel.text = theme.subtitle
-        colorPreview.backgroundColor = theme.primaryColor
-        secondaryPreview.backgroundColor = theme.secondaryColor
-        checkMarkImageView.isHidden = !theme.isSelected
+
+        colorPreview.backgroundColor = theme.colors.primary
+        secondaryPreview.backgroundColor = theme.colors.secondary
+
+        titleLabel.textColor = theme.colors.textColor
+        subtitleLabel.textColor = theme.colors.secondary
+
+        containerView.backgroundColor = theme.colors.surface
+
+        checkMarkImageView.isHidden = !isSelected
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
+
+

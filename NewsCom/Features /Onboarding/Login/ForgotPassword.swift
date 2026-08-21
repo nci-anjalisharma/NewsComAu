@@ -9,15 +9,7 @@
 import UIKit
 
 class ForgotPassword: UIViewController {
-    
-     
-     
-    
-    @IBOutlet weak var emailTextField: UITextField!
-    
-    
-     
-    
+
     
     override func viewDidLoad() {
         
@@ -30,9 +22,5 @@ class ForgotPassword: UIViewController {
     
    @IBAction func sendCode(_ sender: UIButton) {
         
-//       let 
     }
-    
-    
-    
 }

@@ -12,46 +12,92 @@ class AppThemeViewController: UIViewController {
     
     private let tableView = UITableView(frame: .zero, style: .plain)
     
-    
-    var themes: [Theme] = [
-        
-        Theme(
-               title: "Default",
-               subtitle: "Classic NewsCom look",
-               primaryColor: .systemBlue,
-               secondaryColor: .systemGray,
-               backgroundColor: .white,
-               isSelected: true
-           ),
+    private let themes = ThemeRepository.allThemes
 
-        Theme(
-               title: "Autumn",
-               subtitle: "Warm tones",
-               primaryColor: .systemOrange,
-               secondaryColor: .red,
-               backgroundColor: .white,
-               isSelected: false
-           ),
-        
-        Theme(
-               title: "Fairytale",
-               subtitle: "Enchanted Royal",
-               primaryColor: .systemPurple,
-               secondaryColor: .blue,
-               backgroundColor: .white,
-               isSelected: false
-           )
-    ]
+    private var selectedTheme = ThemeManager.shared.currentTheme
     
+    private var selectedAppearance: UIUserInterfaceStyle = UserDefaults.standard.integer(forKey: "AppearanceMode") == 0 ? .light : .dark
     
+    private let applyButton = UIButton(type: .system)
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
         navigationItem.title = "App Theme"
         
-        setupTableView()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(themeChanged), name: .themeChanged, object: nil)
+        
+        setupTableView()
+        setupApplyButton()
+        applyTheme()
+        updateApplyButton()
+    }
+    
+    private func setupApplyButton() {
+        applyButton.setTitle("Apply Theme", for: .normal)
+        applyButton.titleLabel?.font = .systemFont(ofSize: 16, weight: .semibold)
+
+        applyButton.layer.cornerRadius = 25
+        applyButton.clipsToBounds = true
+
+        applyButton.addTarget(
+            self,
+            action: #selector(applyThemeButtonTapped),
+            for: .touchUpInside
+        )
+
+        view.addSubview(applyButton)
+
+        applyButton.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.bottom.equalTo(view.safeAreaLayoutGuide).inset(16)
+            make.width.equalTo(190)
+            make.height.equalTo(50)
+        }
+    }
+    
+    @objc
+    private func applyThemeButtonTapped() {
+
+        ThemeManager.shared.applyTheme(selectedTheme)
+
+        guard
+            let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+            let window = windowScene.windows.first
+        else {
+            navigationController?.popViewController(animated: true)
+            return
+        }
+
+        window.overrideUserInterfaceStyle = selectedAppearance
+
+        UserDefaults.standard.set(
+            selectedAppearance == .light ? 0 : 1,
+            forKey: "AppearanceMode"
+        )
+
+        navigationController?.popViewController(animated: true)
+    }
+    
+    @objc private func themeChanged() {
+
+        print("Theme Changed Notification Received")
+
+        applyTheme()
+    }
+    
+    private func updateApplyButton() {
+        applyButton.backgroundColor = selectedTheme.colors.primary
+
+        applyButton.setTitleColor(selectedTheme.colors.background, for: .normal)
+    }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        applyTheme()
     }
     
     private func setupTableView() {
@@ -68,61 +114,103 @@ class AppThemeViewController: UIViewController {
         
         tableView.register(AppearanceHeaderCell.self, forCellReuseIdentifier: AppearanceHeaderCell.identifier)
         tableView.register(ThemePaletteCell.self, forCellReuseIdentifier: ThemePaletteCell.identifier)
-        tableView.register(LivePreviewCell.self, forCellReuseIdentifier: LivePreviewCell.identifier)
-        tableView.register(ApplyThemeCell.self, forCellReuseIdentifier: ApplyThemeCell.identifier)
         
         view.addSubview(tableView)
         
+//        tableView.snp.makeConstraints { make in
+//            make.edges.equalTo(view.safeAreaLayoutGuide)
+//            make.top.equalTo(view.safeAreaLayoutGuide)
+//        }
+        
         tableView.snp.makeConstraints { make in
-            make.edges.equalTo(view.safeAreaLayoutGuide)
+            make.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+            make.bottom.equalTo(view.safeAreaLayoutGuide).inset(80)
         }
-            
+    }
+    
+    private func applyTheme() {
+
+        view.backgroundColor = selectedTheme.colors.background
+
+        tableView.reloadData()
+    }
+    
+//    private func previewTheme() {
+//
+//        overrideUserInterfaceStyle = selectedAppearance
+//
+//        view.backgroundColor = selectedTheme.colors.background
+//
+//        tableView.reloadData()
+//    }
+    
+    private func previewTheme() {
+
+        overrideUserInterfaceStyle = selectedAppearance
+
+        view.backgroundColor = selectedTheme.colors.background
+
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithDefaultBackground()
+
+        appearance.titleTextAttributes = [
+            .foregroundColor: selectedTheme.colors.primary
+        ]
+
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
+        navigationController?.navigationBar.compactAppearance = appearance
+
+        tableView.reloadData()
+        updateApplyButton()
     }
 }
-
 
 extension AppThemeViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         switch indexPath.section {
-
+            
         case 0:
-
-            return tableView.dequeueReusableCell(
+            
+            let cell = tableView.dequeueReusableCell(
                 withIdentifier: AppearanceHeaderCell.identifier,
-                for: indexPath
-            )
-
+                for: indexPath) as! AppearanceHeaderCell
+            cell.configure(theme: selectedTheme, appearance: selectedAppearance)
+            
+            cell.onAppearanceChanged = { [weak self] index in
+                
+                guard let self else { return }
+                
+                self.selectedAppearance = index == 0 ? .light : .dark
+                
+                self.overrideUserInterfaceStyle = self.selectedAppearance
+            }
+            
+            return cell
+            
         case 1:
-
+            
             let cell = tableView.dequeueReusableCell(
                 withIdentifier: ThemePaletteCell.identifier,
                 for: indexPath
             ) as! ThemePaletteCell
-
-            cell.configure(theme: themes[indexPath.row])
-
+            
+            let theme = themes[indexPath.row]
+            
+            cell.configure(theme: theme, isSelected: theme.id == selectedTheme.id)
+            
+            
             return cell
-
-        case 2:
-
-            return tableView.dequeueReusableCell(
-                withIdentifier: LivePreviewCell.identifier,
-                for: indexPath
-            )
-
+            
         default:
-
-            return tableView.dequeueReusableCell(
-                withIdentifier: ApplyThemeCell.identifier,
-                for: indexPath
-            )
+            return UITableViewCell()
         }
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 4
+        return 2
     }
     
     func tableView(_ tableView: UITableView,
@@ -136,11 +224,8 @@ extension AppThemeViewController: UITableViewDataSource, UITableViewDelegate {
         case 1:
             return themes.count
 
-        case 2:
-            return 1
-
         default:
-            return 1
+            return 0
         }
     }
     
@@ -156,17 +241,17 @@ extension AppThemeViewController: UITableViewDataSource, UITableViewDelegate {
         switch indexPath.section {
             
         case 0:
-            return 140
+            return 100
         case 1:
             return 90
-        case 2:
-            return 280
+//        case 2:
+//            return 50
         default:
             return 120
         }
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 16
+        return 8
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -174,8 +259,8 @@ extension AppThemeViewController: UITableViewDataSource, UITableViewDelegate {
             
         case 1:
             return "Themes"
-        case 3:
-            return "Live Preview"
+//        case 3:
+//            return "Live Preview"
         default:
             return nil
         }
@@ -197,18 +282,9 @@ extension AppThemeViewController: UITableViewDataSource, UITableViewDelegate {
             return
         }
         
-        themes = themes.enumerated().map { index, theme in
-            
-            Theme(
-                title: theme.title,
-                subtitle: theme.subtitle,
-                primaryColor: theme.primaryColor,
-                secondaryColor: theme.secondaryColor,
-                backgroundColor: theme.backgroundColor,
-                isSelected: index == indexPath.row
-            )
-            
-        }
-        tableView.reloadSections(IndexSet(integer: 1), with: .automatic)
+        selectedTheme = themes[indexPath.row]
+        previewTheme()
+
+        tableView.reloadData()
     }
 }

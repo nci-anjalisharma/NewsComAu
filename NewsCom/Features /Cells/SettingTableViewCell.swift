@@ -10,36 +10,25 @@ import SnapKit
 
 class SettingTableViewCell: UITableViewCell {
     
+    private let iconImageView = UIImageView()
+    private let titleLabel = UILabel()
+    private let rightImageView = UIImageView()
     
-    let iconImageView = UIImageView()
-    let titleLabel = UILabel()
-    let rightImageView = UIImageView()
-    
-    
-    override init(style: UITableViewCell.CellStyle,
-                  reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
         setupUI()
-        
-        
     }
-    
     
     private func setupUI(){
         
         titleLabel.font = .systemFont(ofSize: 16, weight: .regular)
         
-        iconImageView.tintColor = .systemBlue
-        
-        rightImageView.tintColor = .systemGray
         rightImageView.image = UIImage(systemName: "chevron.right")
         
         contentView.addSubview(iconImageView)
         contentView.addSubview(titleLabel)
         contentView.addSubview(rightImageView)
-        
         
         iconImageView.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(20)
@@ -58,22 +47,20 @@ class SettingTableViewCell: UITableViewCell {
         }
     }
     
-    
-    
     func configure(title: String, icon: String) {
-
-        titleLabel.text = title
-
-        iconImageView.image = UIImage(systemName: icon)
-        iconImageView.tintColor =  UIColor(named: "BlueSet")
-        iconImageView.backgroundColor = .lightGray.withAlphaComponent(0.2)
         
+        let theme = ThemeManager.shared.currentTheme
+
+        backgroundColor = .clear
+        contentView.backgroundColor = theme.colors.background
+        
+        titleLabel.text = title
+        
+        titleLabel.textColor = theme.colors.primary
+        iconImageView.image = UIImage(systemName: icon)
+        iconImageView.tintColor = theme.colors.secondary
+        rightImageView.tintColor = theme.colors.secondary
     }
-    
-    
-    
-    
-    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
