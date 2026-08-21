@@ -717,6 +717,9 @@ JSONDecoder
 Article
 ```
 
+<img width="750" height="504" alt="Architecture (Data Flow)" src="https://github.com/user-attachments/assets/dac4f722-a126-4fd2-a7ac-dea70ec6d159" />
+
+
 For future versions of the application, a dedicated persistence framework such as SwiftData or Core Data could be considered for larger and more relational datasets.
 
 ---
@@ -797,10 +800,6 @@ SF Symbols are used for system-consistent iconography throughout the application
 One of the major goals of The Daily News was to explore Apple's modern development ecosystem rather than limiting the application to traditional UIKit functionality.
 
 Technologies explored in the project include:
-
-### PaperKit
-
-Used for article annotation and markup interactions.
 
 ### Translation
 
@@ -1014,6 +1013,9 @@ Used to provide Google-based authentication.
 Apple frameworks are used wherever possible to keep the application native to the iOS ecosystem.
 
 ---
+
+<img width="763" height="508" alt="User Flow - NewsApp" src="https://github.com/user-attachments/assets/8d6348e1-604c-4747-819d-e85329ff83a9" />
+
 
 # Future Improvements
 
