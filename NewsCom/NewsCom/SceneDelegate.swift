@@ -20,10 +20,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let window = UIWindow(windowScene: windowScene)
         self.window = window
-    
-//        UserDefaults.standard.removeObject(forKey: "hasFinishedOnboarding")
-        RootNavigationService.shared.showSplash(in: window)
         
+        let appearance = UserDefaults.standard.integer(forKey: "AppearanceMode")
+
+        window.overrideUserInterfaceStyle = appearance == 0 ? .light : .dark
+    
+        UserDefaults.standard.removeObject(forKey: "hasFinishedOnboarding")
+        RootNavigationService.shared.showSplash(in: window)
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
